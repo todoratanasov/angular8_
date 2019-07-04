@@ -1,0 +1,16 @@
+to create a project - ng new my-app
+to open the project - ng serve in to the folder of the project
+
+Всичко като цяло се намира в src=>app
+
+За да ползваме bootstrap трябва да го инсталирам с npm install --save bootstrap@3 (@3 ще качи версията, ако искаме някоя конкретна). След това, за да може Angular да го ползва отиваме в angular.json и там в architect:build:styles преди глобалния ни .css файл в масива добавяме пътя към bootstrap в "node_modules/bootstrap/dist/css/bootstrap.min.css" в този случай. В head на html ще се появи, че сме заредили bootstrap
+
+Първо се изпълнява файла main.ts
+
+Всички компоненти, които създаваме трябва да са в папка app, като добра практика е фолдъра и файла да са с едно и също име и компонента трябва да е name.component.ts. Също така class-а, който ежпортваме трябва да се казва по същия начин NameComponent
+
+В същата папка създаваме name.component.html - html-a, който ще върви с тази компонента
+
+(можем да си създадем компонента и пишейки ng g c nameOfComponent така създадена ще си има всички файлове във фолдер и ще се добави дори в app.module)
+
+В html-а на който и да е компонент добавяме къстъм таг-а и той си се реюзва
