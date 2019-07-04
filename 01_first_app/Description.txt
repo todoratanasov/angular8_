@@ -14,3 +14,16 @@ to open the project - ng serve in to the folder of the project
 (можем да си създадем компонента и пишейки ng g c nameOfComponent така създадена ще си има всички файлове във фолдер и ще се добави дори в app.module)
 
 В html-а на който и да е компонент добавяме къстъм таг-а и той си се реюзва
+
+<button class="btn btn-primary" [disabled]="allowNewServer" >Add Server</button> когато пропърти се сложи в [] означава, че динамично ще му подаваме стойност като в случая е boolean
+
+TIP!
+можем да си направим такава проверка и да disabled бутони, ако няма нищо в инпут полето. Между кавичките трябва да имаме expresion
+<button
+  class="btn btn-primary"
+  [disabled]="someVariable === "" "
+  (click)="onCreateServer()"
+>
+<p [innerText]="allowNewServer"></p> директно подаваме на innerText променлива
+
+в елемента когато искаме да закачим event слагаме евента в (click)='onEvent()' и го подаваме

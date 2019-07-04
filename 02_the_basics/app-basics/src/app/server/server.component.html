@@ -1,1 +1,5 @@
-<p>Server with ID {{serverId}} is {{serverStatus}}</p>
+<!-- [ngStyle]="{backgroundColor: getColor()} така си подаваме инлайн css като това може да стане и с метод-->
+<!-- ngClass ни позволява динамично да подаваме и премахваме css класове като то работи като се подава обект, който има key името на класа (който сме подали на компонентата) : boolean като може директно да си е инлайн експрешън-->
+<p [ngStyle]="{backgroundColor: getColor()}"
+[ngClass]="{online:serverStatus==='online'}"
+>Server with ID {{serverId}} is {{getServerStatus()}}</p>

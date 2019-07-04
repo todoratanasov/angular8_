@@ -1,5 +1,27 @@
-<button class="btn btn-primary" disabled >Add Server</button>
+<!-- (input)="onUpdateServerName($event)" - така си подаваме input евент като в скобите на метода си подаваме стойност-->
+<!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)" /> -->
+<!-- можем да подаваме комбинирано пропърти и евент с [(ngModel)] като по този начин автоматично ще си взима стойността и ще я променя в компонентата. Това е two way data binding-->
+<input type="text" class="form-control" [(ngModel)]="serverName" />
 
+<p>{{ serverName }}</p>
+<!-- [disabled]="!allowNewServer" - означаваме, че ще му подаваме стойност динамично (в случая boolean) -->
+<!-- (click)="onCreateServer()" така подаваме метод, който да се изпълни след event като even-та си го избираме в нормалнте скоби -->
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<!-- тук директно си ползваме innerText на елемента и му подаваме стойността на променливата -->
+<p [innerText]="allowNewServer"></p>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<!-- с *ngIf си ползваме if statement като в "" е експрешън true or false и по този начин елемента няма да се покаже или ще се покаже -->
+<p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
 
-<app-server></app-server>
-<app-server></app-server>
+<!-- Ако искаме да ползваме if/else се прави по този начин долу -->
+<!-- <p *ngIf="serverCreated; else noServer">Server was created, server name is {{ serverName }}</p>
+<ng-template #noServer><p>No server was created!</p></ng-template> -->
+
+<!-- с *ngFor="let server of servers; по този начин си лупваме в servers като servers в случая е array, който държим в компонентата си, а server си е всяка една от стойностите добавяйки let i=index; тук вече имаме моментния индекс от масива, който се лупва-->
+<app-server *ngFor="let server of servers; let i=index;"></app-server>
