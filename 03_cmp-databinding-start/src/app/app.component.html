@@ -1,0 +1,17 @@
+<div class="container">
+  <!-- по този (serverCreated)="onServerAdded()" начин ние слушаме точно за тези евенти, който когато се тригърнат това в скобите ще бъде предадено на onServerAdded($event)(метода, който се намира в app.component) и така данните, които в случая са обект, който си наливаме в cockpit.component-->
+  <app-cockpit 
+  (serverCreated)="onServerAdded($event)"
+  (blueprintCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- тук си форийчваме променливата serverElements, която е масив и слагайки стойност на  [element] (което реално е пропърти в app-server-element.component) стойността стига и до този компонент-->
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [element]="serverElement"
+      ></app-server-element>
+    </div>
+  </div>
+</div>
