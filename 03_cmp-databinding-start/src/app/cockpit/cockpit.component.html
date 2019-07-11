@@ -2,11 +2,18 @@
   <div class="col-xs-12">
     <p>Add new Servers or blueprints!</p>
     <label>Server Name</label>
-    <input type="text" class="form-control" [(ngModel)]="newServerName" />
+    <!-- закоментирам го това, за да покажа друг начин на подаване на велюто от инпут-а с локална променлива-->
+    <!-- <input type="text" class="form-control" [(ngModel)]="newServerName" /> -->
+    <!-- подавайки по този начин #serverNameInput в елемента това пропърти вече държи този елемент и можем да го подаваме тук на методи (като например долу в onAddServer(serverNameInput)) -->
+    <input type="text" class="form-control" #serverNameInput />
     <label>Server Content</label>
-    <input type="text" class="form-control" [(ngModel)]="newServerContent" />
+    <!-- <input type="text" class="form-control" [(ngModel)]="newServerContent" /> -->
+    <!-- добавяме отново локална променлива тук, за да можем да я достъпим директно през typescript -->
+    <input type="text" class="form-control" #serverContent />
     <br />
-    <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
+    <button class="btn btn-primary" (click)="onAddServer(serverNameInput)">
+      Add Server
+    </button>
     <button class="btn btn-primary" (click)="onAddBlueprint()">
       Add Server Blueprint
     </button>
