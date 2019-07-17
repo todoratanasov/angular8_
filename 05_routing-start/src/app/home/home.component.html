@@ -1,0 +1,8 @@
+<h4>Welcome to Server Manager 4.0</h4>
+<p>Manage your Servers and Users.</p>
+<!-- по този начин сега ще напишем как след като се случи нещо да ни редиректва към друг компонент (path) -->
+<button class="btn btn-primary" (click)="onLoadServers()">Load Servers</button>
+<!-- за да ползваме query прави този метод -->
+<button class="btn btn-primary" (click)="onLoadServer(1)">Load Server 1</button>
+<button class="btn btn-default" (click)="onLogin()">Login</button>
+<button class="btn btn-default" (click)="onLogout()">Logout</button>

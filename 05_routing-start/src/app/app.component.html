@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+        <!-- с най-обикновенни линкове се навигираме, но това не е най-добрия начин защото апликацията се рефрешва, а се прави с routerLink="/"-->
+        <!-- routerLinkActive="className" подавайки това на wrapper-a или на самия <a> когато този път е активен ще му закачи какъвто css клас искаме т.е. в случая ще сложи css на li-то, за да изглежда активно, но за да работи трябва да добавим и [routerLinkActiveOptions]="{ exact: true }", което ще каже, че пътя трябва е точно такъв -->
+        <li
+          role="presentation"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a routerLink="/">Home</a>
+        </li>
+        <li
+          role="presentation"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a routerLink="/servers">Servers</a>
+        </li>
+        <li
+          role="presentation"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a routerLink="/users">Users</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- така си подаваме раутвете къде ще се рендерират!! -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
