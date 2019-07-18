@@ -12,6 +12,9 @@ import { ServerComponent } from "./servers/server/server.component";
 import { ServersService } from "./servers/servers.service";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AuthGuard } from "./auth-guard.service";
+import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { ServerResolver } from "./servers/server/server-resolver.service";
 
 //тук си дефинираме масив от пътищата
 const appRoutes: Routes = [
@@ -28,19 +31,35 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuard],
     component: ServersComponent,
     children: [
-      { path: ":id/edit", component: EditServerComponent },
-      { path: ":id", component: ServerComponent }
+      {
+        path: ":id/edit",
+        component: EditServerComponent,
+        canDeactivate: [CanDeactivateGuard]
+      },
+      //след като се изпълни ServerResolver това, което върне ще бъде закачено на server и вече в компонентата можем да си ползваме инфото
+      {
+        path: ":id",
+        component: ServerComponent,
+        resolve: { server: ServerResolver }
+      }
     ]
   },
   { path: "users/:id/:name", component: UserComponent },
-  { path: "not-found", component: PageNotFoundComponent },
+  // { path: "not-found", component: PageNotFoundComponent }, закоментирам го защото вместо него ще се ползва отделен компонент, в който ще наливаме съобщенията за грешка
+  //добавяйки data:{message: 'Page not found!'} можем да си преизползваме примерно този компонент като всеки път му подаваме различна статична data и вече неговия компонент си я взима и прави каквото трябва с нея
+  {
+    path: "not-found",
+    component: ErrorPageComponent,
+    data: { message: "Page not found!" }
+  },
   //това е начина да редиректнем към даден раут като ** когато са накрая обират всички пътища. които не са матчнати горе
   { path: "**", redirectTo: "/not-found" }
   // { path: "servers/:id/edit", component: EditServerComponent },
   // { path: "servers/:id", component: ServerComponent }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  //{useHash:true} това е много важно когато се деплойва защото по този начин ще кажем на истинския сървър, че искаме да игнорира всичко след #-га, а не да се опитва всеки път да ни потърси целия път защото винаги ще връща 404
+  imports: [RouterModule.forRoot(appRoutes, { useHash: true })],
   //след като сме си импортнали RouterModule, зкачили сме му всичките пътища просто го експортваме, за да може в app.module да си го ползваме и така кода остава доста по-чист
   exports: [RouterModule]
 })
