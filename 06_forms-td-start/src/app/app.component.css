@@ -1,0 +1,7 @@
+.container {
+  margin-top: 30px;
+}
+/* това е държавен клас, който ангулар дава на невалидните инпути и използвайки и класа .ng-touched ще стане червен бордъра само, ако се докосне */
+input.ng-invalid.ng-touched{
+  border: 1px solid red;
+}

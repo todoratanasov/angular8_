@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="list-group">
+      <!-- този <a> има ngFor loop и по този начин [routerLink]="['/users', user.id, user.name]" мозем да си използваме данните от loop-a, за да си създадем url-a подавайки данни от компонентата-->
+      <a
+        [routerLink]="['/users', user.id, user.name]"
+        href="#"
+        class="list-group-item"
+        *ngFor="let user of users"
+      >
+        {{ user.name }}
+      </a>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+    <app-user></app-user>
+  </div>
+</div>

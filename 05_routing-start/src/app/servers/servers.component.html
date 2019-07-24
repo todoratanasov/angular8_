@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="list-group">
+      <!-- по този [routerLink]="['/servers',5,'edit']" начин отново подаваме url, но този път така си го сглобяваме като само ще го раздели както трябва, а с [queryParams]="{allowEdit: '1'}" подаваме на rout-а query параметри. С fragment ще подадем фрагмент и накрая url-а ще е /servers/:5/edit?allowEdit=1#loading Продължаваме в home.component.html където ще създадем раута динамично програматично :)-->
+      <!-- <a
+
+      [routerLink]="['/servers',5,'edit']"
+      [queryParams]="{allowEdit: '1'}"
+      fragment="loading"
+        href="#"
+        class="list-group-item"
+        *ngFor="let server of servers">
+        {{ server.name }}
+      </a> -->
+      <!-- така е същото като горе (без edit и затоа си създаваме и нов route в appModule), но ще си създадем url-a динамично през ngFor loop-a -->
+      <!-- [queryParams]="{ allowEdit: server.id===3?'1':'0' }" по този начин си правим директно проверка с тернарен оператор и си сетваме каквато стойност преценим -->
+      <a
+        [routerLink]="['/servers', server.id]"
+        [queryParams]="{ allowEdit: server.id===3?'1':'0' }"
+        fragment="loading"
+        href="#"
+        class="list-group-item"
+        *ngFor="let server of servers"
+      >
+        {{ server.name }}
+      </a>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+    <!-- с router-outlet указваме къде ще се рендерират децата от children rout-a и така рендерирането става вече в компонента директно-->
+    <router-outlet></router-outlet>
+    <!-- <button class="btn btn-primary" (click)="onReload()">Reload Page</button>
+    <app-edit-server></app-edit-server>
+    <hr />
+    <app-server></app-server> -->
+  </div>
+</div>

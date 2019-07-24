@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- винаги когато в проекта има форма ангулар я засича и държавния събмит е да има бутон от тиб събмит и самата форма да слуша за ngSubmit по този начин като и добавим някакъв метод от компонентата и закачайки #f-ngForm и след това подавайки го на метода в компонентата си получаваме обекта-->
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <!-- подавайк така ngModelGroup получаваме във value на фомрата поле userData, което групира value-то на инпутите съдържащи се в този елемент, а подавайки локална променлива #userData присвояваме стойността от value-то на цялата група -->
+        <div id="user-data" ngModelGroup="userData" #userData>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <!-- Слага се ngModel, за да може да разпознае Ангулар, че искаме да вземем инфо от този инпут и взимането става с name -->
+            <input type="text" id="username" class="form-control" ngModel name="username" required />
+          </div>
+          <button class="btn btn-default" type="button" (click)=suggestUserName()>
+            Suggest an Username
+          </button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <!-- за валидация може да се сложи и required, а на email - email и обекта ngForm ще има valid пропърти, което ще е false-->
+            <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel" />
+            <!-- добавяйки локална променлива #email на инпута държаща ngModel тук правим проверка и съответно показваме елемента -->
+            <span *ngIf="!email.valid && email.touched" class="help-block">Please enter a valid e-mail</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <!-- добвяйки пропърти байндинг на select-a в случая взимаме стойността на defaultQuestion в компонента, което ще се яви като value което от своя страна ще хване value='pet' на един от option-ите -->
+          <select id="secret" class="form-control" [ngModel]="defaultQuestion" name="secret">
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <!-- тук вече правейки two way data binding и създавайки answer в компонентата при всяко натискане на клавиатурата ще си изписваме в {{answer}} -->
+          <textarea class="form-control" name="questionAnswer" rows="3" [(ngModel)]="answer"></textarea>
+        </div>
+        <p>Your reply: {{ answer }}</p>
+        <div class="radio" *ngFor="let gender of genders">
+          <label for="">
+            <!-- по този начин ще си създадем динамично радиобутони като [value]="gender" gender тук е gender-а от ngFor -->
+            <input type="radio" name="gender" [value]="gender">{{gender}}
+          </label>
+        </div>
+        <!-- Добавяйки пропърти байндинг правим проверка дали формата е валидна и крием или показваме бутона за още една валидация можем да ползваме държавните класове, които ангулар добавя към всеки инпут, който е валиден или не. Виж главния css на приложението-->
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h3> Your data</h3>
+      <p>Username: {{user.username}} </p>
+      <p>Mail: {{user.email}}</p>
+    </div>
+  </div>
+</div>
