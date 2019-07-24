@@ -7,7 +7,12 @@
       <br /><br />
       <ul class="list-group">
         <div *ngIf="onlyOdd">
-          <li class="list-group-item" *ngFor="let number of oddNumbers">
+          <!-- [ngClass]={odd} - добавяме класове към елемента -->
+          <li
+            class="list-group-item"
+            *ngFor="let number of oddNumbers"
+            [ngClass]="{odd}"
+          >
             {{ number }}
           </li>
         </div>
@@ -17,9 +22,18 @@
           </li>
         </div>
       </ul>
+      <!-- така си добавяме нашата директива  -->
+      <p appBasicHighLight></p>
+      <!-- тук си подаваме директивата със съответния и селектор и вече можем да си добавяме пропъртита, които ще се баийнднат с нея и ще си променят стойностите и -->
+      <p
+        appBetterHighlight
+        [defailtColor]="'yellow'"
+        [highlightColor]="'red'"
+      ></p>
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
+      <div *appUnless = "onlyOdd"></div>
     </div>
   </div>
 </div>
